@@ -3,5 +3,14 @@ jdk:
   - openjdk8
 secret_access_key:
   secure: $SECRETACCESSSONAR
+addons:
+  sonarcloud:
+    organization: "dylanlicho"
+    token:
+      secure: $SECRETACCESSSONAR
+
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 after_deploy:
 - echo "done deploying"
