@@ -6,7 +6,7 @@ install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 addons:
   sonarcloud:
-    organization: "Dylanlicho"
+    organization: "dylanlicho"
     token: $SECRETACCESSSONAR
 script:
   - mvn package
