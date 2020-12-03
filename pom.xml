@@ -17,10 +17,15 @@
 	<properties>
 		<java.version>1.8</java.version>
     <!-- Sonar -->
-    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-    <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
-    <sonar.language>java</sonar.language>
+		<sonar.sources>src/main</sonar.sources>
+    <sonar.tests>src/test</sonar.tests>
+		<!-- Below property indicates the pattern of the test suite -->
+		<runSuite>**/*Suite.class</runSuite>
+		<!-- Sonar-JaCoCo properties -->
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+		<sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+		<sonar.language>java</sonar.language>
 	</properties>
 
 	<dependencies>
@@ -49,23 +54,32 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
 			<plugin>
-			    <groupId>org.jacoco</groupId>
-			    <artifactId>jacoco-maven-plugin</artifactId>
-			    <version>0.6.0.201210061924</version>
-			    <configuration>
-			        <destFile>${sonar.jacoco.reportPath}</destFile>
-			        <append>true</append>
-			    </configuration>
-			    <executions>
-			        <execution>
-			            <id>agent</id>
-			            <goals>
-			                <goal>prepare-agent</goal>
-			            </goals>
-			        </execution>
-			    </executions>
-			</plugin>
+    <groupId>org.jacoco</groupId>
+    <artifactId>jacoco-maven-plugin</artifactId>
+    <version>0.8.5</version>
+    <executions>
+	        <execution>
+	            <id>prepare-and-report</id>
+	            <goals>
+	                <goal>prepare-agent</goal>
+	                <goal>report</goal>
+	            </goals>
+	        </execution>
+	        <execution>
+	            <id>report-aggregate</id>
+	            <phase>verify</phase>
+	            <goals>
+	                <goal>report-aggregate</goal>
+	            </goals>
+	            <configuration>
+	                <outputDirectory>${project.basedir}/../target/site/jacoco-aggregate</outputDirectory>
+	            </configuration>
+	        </execution>
+	    </executions>
+	</plugin>
+
 		</plugins>
 	</build>
 
