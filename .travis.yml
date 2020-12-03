@@ -6,7 +6,8 @@ addon:
   sonarcloud:
     token:
       secure: $SECRETACCESSSONAR
-
+install:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
   #- mvn package
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
