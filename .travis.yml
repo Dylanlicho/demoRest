@@ -1,11 +1,8 @@
 language: java
 jdk:
   - openjdk8
-secret_access_key:
-  secure: $SECRETACCESSSONAR
-addons:
+addon:
   sonarcloud:
-    organization: "dylanlicho"
     token:
       secure: $SECRETACCESSSONAR
 
