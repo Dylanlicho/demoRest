@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "/adder", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class AdderController {
 
     private AdderService adderService;
